@@ -161,6 +161,56 @@ namespace RetroBar
             ShellHelper.StartTaskManager();
         }
 
+        
+
+
+        Shell32.Shell _shell = new Shell32.Shell();
+
+        private void CascadeWindowsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ContextMenu.IsOpen = false;
+            _shell.CascadeWindows();
+            ShowUndoItem(sender);
+        }
+
+        private void StackWindowsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ContextMenu.IsOpen = false;
+            _shell.TileVertically();
+            ShowUndoItem(sender);
+        }
+
+        private void SideBySideWindowsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ContextMenu.IsOpen = false;
+            _shell.TileHorizontally();
+            ShowUndoItem(sender);
+        }
+
+        private void ShowDesktopMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ContextMenu.IsOpen = false;
+            _shell.ToggleDesktop();
+            ShowUndoItem(sender);
+        }
+
+
+        private void ShowUndoItem(object item)
+        {
+            UndoArrangeWindowsMenuItem.Header = "Undo " + ((System.Windows.Controls.MenuItem)item).Header.ToString();
+            UndoArrangeWindowsMenuItem.Visibility = Visibility.Visible;
+        }
+
+        private void UndoArrangeWindowsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            _shell.UndoMinimizeALL();
+            UndoArrangeWindowsMenuItem.Visibility = Visibility.Collapsed;
+        }
+
+
+
+
+
         private void PropertiesMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             App app = (App)Application.Current;

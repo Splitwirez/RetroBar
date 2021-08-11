@@ -28,6 +28,12 @@
     </Border>
     <appbar:AppBarWindow.ContextMenu>
         <ContextMenu>
+            <MenuItem Header="Cascade windows" Name="CascadeWindowsMenuItem" Click="CascadeWindowsMenuItem_OnClick" />
+            <MenuItem Header="Show windows stacked" Name="StackWindowsMenuItem" Click="StackWindowsMenuItem_OnClick" />
+            <MenuItem Header="Show windows side by side" Name="SideBySideWindowsMenuItem" Click="SideBySideWindowsMenuItem_OnClick" />
+            <MenuItem Header="Show the desktop" Name="ShowDesktopMenuItem" Click="ShowDesktopMenuItem_OnClick" />
+            <MenuItem Header="Undo you" Name="UndoArrangeWindowsMenuItem" Click="UndoArrangeWindowsMenuItem_OnClick" Visibility="Collapsed"/>
+            <Separator />
             <MenuItem Header="Task Manager..." Name="TaskManagerMenuItem" Click="TaskManagerMenuItem_OnClick" />
             <Separator />
             <MenuItem Header="Properties" Name="PropertiesMenuItem" Click="PropertiesMenuItem_OnClick" />
