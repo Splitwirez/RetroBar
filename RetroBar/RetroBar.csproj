@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Themes\Longhorn Plex Concept.xaml" />
     <Page Remove="Themes\Watercolor.xaml" />
     <Page Remove="Themes\Windows 2000.xaml" />
     <Page Remove="Themes\Windows 95-98.xaml" />
@@ -34,6 +35,12 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="Themes\Windows Me.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Include="Themes\Longhorn Plex Concept.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -68,6 +75,11 @@
     <Resource Include="Resources\properties_noclock.png" />
     <Resource Include="Resources\start9x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Resources\Fonts\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">
@@ -89,6 +101,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Resources\startxpclassic.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\startplexc1*.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
