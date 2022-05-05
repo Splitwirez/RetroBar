@@ -89,6 +89,12 @@
                 <MenuItem Header="{DynamicResource new_toolbar}" Name="NewToolbarMenuItem" />
             </MenuItem>
             <Separator /-->
+            <MenuItem Header="Cascade windows" Name="CascadeWindowsMenuItem" Click="CascadeWindowsMenuItem_OnClick" />
+            <MenuItem Header="Show windows stacked" Name="StackWindowsMenuItem" Click="StackWindowsMenuItem_OnClick" />
+            <MenuItem Header="Show windows side by side" Name="SideBySideWindowsMenuItem" Click="SideBySideWindowsMenuItem_OnClick" />
+            <MenuItem Header="Show the desktop" Name="ShowDesktopMenuItem" Click="ShowDesktopMenuItem_OnClick" />
+            <MenuItem Header="Undo you" Name="UndoArrangeWindowsMenuItem" Click="UndoArrangeWindowsMenuItem_OnClick" Visibility="Collapsed"/>
+            <Separator />
             <MenuItem Header="{DynamicResource set_time}"
                       Name="DateTimeMenuItem"
                       Click="DateTimeMenuItem_OnClick"

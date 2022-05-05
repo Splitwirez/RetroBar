@@ -24,6 +24,8 @@ namespace RetroBar
         private ShellManager _shellManager;
         private Updater _updater;
         private WindowManager _windowManager;
+        private string _arrangeDesktopWindowsUndoTitle = string.Empty;
+        private Action _arrangeDesktopWindowsUndoAction = null;
 
         public Taskbar(WindowManager windowManager, ShellManager shellManager, StartMenuMonitor startMenuMonitor, Updater updater, AppBarScreen screen, AppBarEdge edge)
             : base(shellManager.AppBarManager, shellManager.ExplorerHelper, shellManager.FullScreenHelper, screen, edge, 0)
@@ -55,6 +57,19 @@ namespace RetroBar
             {
                 StartButton.Visibility = Visibility.Collapsed;
             }
+
+            WindowHelper.ArrangeDesktopWindowsUndoChanged += (_, e) =>
+            {
+                _arrangeDesktopWindowsUndoAction = e.Action;
+
+                if (_arrangeDesktopWindowsUndoAction != null)
+                {
+                    UndoArrangeWindowsMenuItem.Header = _arrangeDesktopWindowsUndoTitle;
+                    UndoArrangeWindowsMenuItem.Visibility = Visibility.Visible;
+                }
+                else
+                    UndoArrangeWindowsMenuItem.Visibility = Visibility.Collapsed;
+            };
         }
 
         protected override void OnSourceInitialized(object sender, EventArgs e)
@@ -231,6 +246,37 @@ namespace RetroBar
             };
 
             Process.Start(psi);
+        }
+
+        private void CascadeWindowsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            PrepareUndoItemHeader(sender);
+            WindowHelper.CascadeDesktopWindows();
+        }
+
+        private void StackWindowsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            PrepareUndoItemHeader(sender);
+            WindowHelper.StackDesktopWindows(Orientation.Vertical);
+        }
+
+        private void SideBySideWindowsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            PrepareUndoItemHeader(sender);
+            WindowHelper.StackDesktopWindows(Orientation.Horizontal);
+        }
+
+        private void ShowDesktopMenuItem_OnClick(object sender, RoutedEventArgs e)
+            => WindowHelper.ToggleDesktop();
+
+
+        private void PrepareUndoItemHeader(object item)
+            => _arrangeDesktopWindowsUndoTitle = "Undo " + ((MenuItem)item).Header.ToString();
+
+        private void UndoArrangeWindowsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (_arrangeDesktopWindowsUndoAction != null)
+                _arrangeDesktopWindowsUndoAction();
         }
 
         private void PropertiesMenuItem_OnClick(object sender, RoutedEventArgs e)
